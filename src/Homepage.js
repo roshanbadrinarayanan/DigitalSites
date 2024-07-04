@@ -5,7 +5,7 @@ import Part3 from "./Part3";
 import Slideshow from "./Slideshow";
 import About from "./About";
 import Launch from "./Launch";
-import "./Style.css"
+import "./Style.css" 
 
 function Home(){
     return (

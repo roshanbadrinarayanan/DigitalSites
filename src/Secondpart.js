@@ -3,7 +3,7 @@ import img1 from "./webdesignanddevelopment.png"
 import img2 from "./increaseyoursales.png"
 
 function Second(){
-
+ 
     const goTo = () => {
         window.open("https://store.zoho.in/ResellerCustomerSignUp.do?id=a6b06d2909612b54e59d3cc0d522b3a4", "_blank");
     };

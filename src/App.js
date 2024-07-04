@@ -4,6 +4,7 @@ import "./Style.css";
 import Nav from './Nav';
 import Home from './Homepage';
 import Footer from './Footer';
+import Contact from './ContactPage';
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* Add more routes here as needed */}
+          <Route path='/contact' element={<Contact />} />
         </Routes>
         <Footer />
       </div>
