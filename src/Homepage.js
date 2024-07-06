@@ -6,19 +6,25 @@ import Slideshow from "./Slideshow";
 import About from "./About";
 import Launch from "./Launch";
 import "./Style.css"
+import { Helmet } from "react-helmet";
 
 
 function Home(){
 
     return (
-        <main>
-            <Intro /><br></br><br></br>
-            <Second /><br></br><br></br>
-            <Part3 /><br></br><br></br>
-            <Slideshow /><br></br><br></br>
-            <About /><br></br><br></br>
-            <Launch />
-        </main>
+        <>
+            <Helmet>
+                <title>Digital Sites</title>
+            </Helmet>
+            <main>
+                <Intro /><br></br><br></br>
+                <Second /><br></br><br></br>
+                <Part3 /><br></br><br></br>
+                <Slideshow /><br></br><br></br>
+                <About /><br></br><br></br>
+                <Launch />
+            </main>
+        </>
     );
 }
 

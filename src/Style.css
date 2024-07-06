@@ -332,11 +332,18 @@
     background-color: #777;
 }
 
-.img img {
+.img img{
     max-width: 100%;
     height: auto;
-    border-radius: 0.625em;
+    border-radius: 1em;
     object-fit: contain;
+    box-shadow: 0 0.25em 0.5em rgb(119, 116, 116);
+}
+.img{
+    transition: transform 0.3s linear;
+}
+.img:hover{
+    transform: scale(1.05);
 }
 
 @media(max-width:768px){
@@ -847,6 +854,7 @@ body, html {
         align-items: center;
         transform: translateX(100%);
         transition: transform 0.3s ease-in;
+        z-index: 1000;
     }
 
     .nav-links.open {
@@ -1006,6 +1014,9 @@ body, html {
     .socialmediatext{
         transform: translateY(80%);
     }
+    .dmintro p{
+        margin-bottom: 10%;
+    }
 }
 
 .offerimg {
@@ -1064,7 +1075,181 @@ body, html {
         transform: translateY(65%);
         font-size: large;
     }
+    .socialmediatext{
+        margin-left: 1%;
+    }
     .dmintro{
         transform: translateY(-10%);
     }
+    .dmintro p{
+        font-weight: 500;
+    }
+}
+
+
+
+
+/*Services*/
+
+.services {
+    padding: 2rem;
+    background-color: #e4d9d9;
+}
+
+.cloud, .ecommerce {
+    padding: 2rem;
+    border: 0.1rem solid #ccc;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    background-color: #979090;
+}
+
+.cloud img, .cloudtext, .ecommerce img, .ecommercetext {
+    flex: 1;
+    min-width: 25rem;
+    max-width: 100%; /* Ensure the width does not exceed the container */
+}
+
+.ecommercetext, .cloudtext {
+    font-size: large;
+    font-weight: 500;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.ecommercetext h2, .cloudtext h2 {
+    transform: translateY(-50%);
+    color: #333;
+}
+.services img{
+    border-radius: 1rem;
+}
+
+.industry1, .industry2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.together {
+    flex: 1;
+    min-width: 15rem;
+    height: 12rem;
+    padding: 2rem;
+    border: 0.1rem solid #ccc;
+    border-radius: 1rem;
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
+    background-color: white;
+    transition: transform 0.3s ease;
+}
+
+.together h3 {
+    margin-top: 0;
+    color: #4A148C;
+}
+
+.together:hover {
+    transform: scale(1.1);
+}
+
+.list {
+    padding-left: 2rem;
+}
+
+.last {
+    text-align: center;
+    padding: 2rem;
+    border: 0.1rem solid #ccc;
+    border-radius: 1rem;
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
+    background-color: rgb(171, 165, 165);
+    margin-top: 7%;
+}
+
+.last h4 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #39373a;
+}
+
+.last h5 {
+    margin: 1rem 0;
+    font-size: 1.5em;
+}
+
+#button9{
+    display: block;
+    margin: 2rem auto;
+    padding: 1rem 2rem;
+    font-size: 1em;
+    color: white;
+    background-color: #333;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1%;
+}
+
+#button9:hover{
+    background-color: #555;
+}
+
+#industryfocus {
+    margin-bottom: 3%;
+    text-align: center;
+    font-size: 250%;
+    margin-top: 5%;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .cloud, .ecommerce {
+        flex-direction: column;
+        align-items: center; /* Center the content */
+        width: 90%;
+        transform: translateX(-5%);
+    }
+
+    .cloud img, .ecommerce img, .cloudtext, .ecommercetext {
+        flex: 1 1 auto;
+        min-width: auto; /* Reset min-width for smaller screens */
+        width: 100%; /* Ensure the content fits within the screen */
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    }
+
+    .cloudtext h2, .ecommercetext h2 {
+        transform: none;
+        text-align: center;
+        margin: 1rem 0;
+    }
+    #industryfocus{
+        transform: translateY(-20%);
+    }
+    .ecommerce img{
+        transform: translateY(-225%);
+    }
+    .ecommercetext{
+        transform: translateY(50%);
+    }
+}
+.captchaerror{
+    color: red;
+    font-size: 0.875rem;
+    margin-top: -0.625rem;
+    margin-bottom: 0.625rem;
+    margin-top: 1.5%;
+}
+.refresh-icon{
+    margin-left: 3.5%;
+}
+.star{
+    margin-left: 0.5%;
+    color: tomato;
+    font-size: 120%;
 }

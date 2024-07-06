@@ -7,6 +7,9 @@ import Footer from './Footer';
 import Contact from './ContactPage';
 import { FaArrowUp } from 'react-icons/fa';
 import DigitalMarketing from './DigitalMarketing';
+import { HelmetProvider } from 'react-helmet-async';
+import Services from './Services';
+
 
 function App() {
 
@@ -22,20 +25,23 @@ function App() {
 };
 
   return (
-    <Router>
-      <div className='App'>
-        <Nav />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path='/contact' element={<Contact />} />
-          <Route path='/digital-marketing' element={<DigitalMarketing />} />
-        </Routes>
-        <Footer />
-        <button className="scroll-to-top" onClick={scrollToTop}><h7>Back to top</h7>
-          <FaArrowUp />
-        </button>
-      </div>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <div className='App'>
+          <Nav />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path='/contact' element={<Contact />} />
+            <Route path='/digital-marketing' element={<DigitalMarketing />} />
+            <Route path='/services' element={<Services />} />
+          </Routes>
+          <Footer />
+          <button className="scroll-to-top" onClick={scrollToTop}><h7>Back to top</h7>
+            <FaArrowUp />
+          </button>
+        </div>
+      </Router>
+    </HelmetProvider>
   );
 }
 

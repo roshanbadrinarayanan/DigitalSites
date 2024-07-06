@@ -1,21 +1,63 @@
-import { useState } from "react";
-import React from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import emailjs from "emailjs-com";
+import { RiRefreshLine } from "react-icons/ri";
 
 function Contact1() {
+
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
-    const [error, setError] = useState("");
+    const [phoneerror, setPhoneError] = useState("");
+    const [captchaerror, setCaptchaError] = useState("");
+    const [captcha, setCaptcha] = useState("");
+    const [enteredcaptcha, setEnteredCaptcha] = useState("");
+
+    const generatecaptcha = () => {
+        var characters = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuioplkjhgfdsazxcvbnm1234567890"
+        var str = ""
+        for(var i=0; i<6; i++){
+            str += characters.charAt(Math.floor(Math.random()*62))
+        }
+        setCaptcha(str);
+    }
+
+    useEffect(() => {
+        generatecaptcha();
+    }, []);
 
     const handlesubmit = (e) => {
         e.preventDefault();
         if (phone.length !== 10) {
-            setError("Phone number must be exactly 10 digits.");
+            setPhoneError("Phone number must be exactly 10 digits.");
             return;
         }
-        console.log("Form submitted", { name, phone, email, message });
-        setError("");
+        if(enteredcaptcha != captcha){
+            setCaptchaError("Captcha does not match")
+            return;
+        }
+
+        const templateParams = {
+            name,
+            phone,
+            email,
+            message
+        };
+
+        emailjs.send('service_meh9cwy', 'template_wvb38sw', templateParams, 'RsXo-SVngYaUiFZBv')
+            .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+                alert("Form submitted successfully!");
+            }, (err) => {
+                console.error('FAILED...', err);
+                alert("Failed to send the form. Please try again.");
+            });
+
+        setPhoneError("");
+        setCaptchaError("");
+        handleReset();
+        generatecaptcha();
     };
 
     const handleNameChange = (e) => {
@@ -42,8 +84,19 @@ function Contact1() {
         setPhone("");
         setEmail("");
         setMessage("");
-        setError("");
+        setPhoneError("");
+        setCaptchaError("");
+        setCaptcha("");
     };
+
+    const handleCaptchaChange = (e) => {
+        setEnteredCaptcha(e.target.value);
+    }
+
+    const refreshCaptcha = () => {
+        generatecaptcha();
+        setEnteredCaptcha("");
+    }
 
     return (
         <section className="contact1">
@@ -51,7 +104,7 @@ function Contact1() {
                 <h2>Your Digital Transformation Partner</h2>
                 <h3>Contact Us</h3>
                 <form onSubmit={handlesubmit} className="form-container">
-                    <label htmlFor="name">Name</label>
+                    <label htmlFor="name">Name<span className="star">*</span></label>
                     <input
                         type="text"
                         id="name"
@@ -60,7 +113,7 @@ function Contact1() {
                         required
                         aria-label="Name"
                     />
-                    <label htmlFor="phone">Phone</label>
+                    <label htmlFor="phone">Phone<span className="star">*</span></label>
                     <input
                         type="number"
                         id="phone"
@@ -68,12 +121,11 @@ function Contact1() {
                         onChange={handlePhoneChange}
                         required
                         aria-label="Phone"
-                        //pattern="\d{10}"
                         maxLength="10"
                         title="Phone number should be 10 digits"
                     />
-                    {error && <p className="error">{error}</p>}
-                    <label htmlFor="email">E-mail</label>
+                    {phoneerror && <p className="error">{phoneerror}</p>}
+                    <label htmlFor="email">E-mail<span className="star">*</span></label>
                     <input
                         type="email"
                         id="email"
@@ -90,6 +142,21 @@ function Contact1() {
                         placeholder="Enter a message for us"
                         aria-label="Message"
                     />
+                    <div className="captchacontainer">
+                        <label htmlFor="captcha">Enter Captcha<span className="star">*</span></label>
+                        <input
+                            type="text"
+                            value={enteredcaptcha}
+                            id="captcha"
+                            onChange={handleCaptchaChange}
+                            required
+                        />
+                        <span>{captcha}</span>
+                        <button type="button" className="refresh-icon" onClick={refreshCaptcha}>
+                                <RiRefreshLine />
+                        </button><br></br>
+                        {captchaerror && <p className="captchaerror">{captchaerror}</p>}
+                    </div>
                     <div className="button-container">
                         <button type="submit" id="button6">Submit</button>
                         <button type="button" id="button7" onClick={handleReset}>Reset</button>

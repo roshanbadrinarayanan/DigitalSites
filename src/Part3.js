@@ -6,7 +6,7 @@ function Part3(){
 
     const navigate = useNavigate();
     const submit = () => {
-        navigate("/digital-marketing")
+        navigate("/digital-marketing") 
     }
 
     return(
