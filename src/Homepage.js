@@ -5,13 +5,15 @@ import Part3 from "./Part3";
 import Slideshow from "./Slideshow";
 import About from "./About";
 import Launch from "./Launch";
-import "./Style.css" 
+import "./Style.css"
+
 
 function Home(){
+
     return (
         <main>
             <Intro /><br></br><br></br>
-            <Second /><br></br><br></br><br></br><br></br><br></br><br></br>
+            <Second /><br></br><br></br>
             <Part3 /><br></br><br></br>
             <Slideshow /><br></br><br></br>
             <About /><br></br><br></br>

@@ -5,7 +5,7 @@ import Contact2 from "./contact2";
 function Contact(){
     return(
         <main>
-            <Contact1 />
+            <Contact1 /><br></br><br></br>
             <Contact2 />
         </main>
     )
