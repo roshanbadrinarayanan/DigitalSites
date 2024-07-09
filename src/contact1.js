@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import emailjs from "emailjs-com";
-import { RiRefreshLine } from "react-icons/ri";
+import { RiRefreshLine, RiMapPin2Line, RiMailLine, RiPhoneLine } from "react-icons/ri";
 
 function Contact1() {
-
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
@@ -15,26 +13,55 @@ function Contact1() {
     const [enteredcaptcha, setEnteredCaptcha] = useState("");
 
     const generatecaptcha = () => {
-        var characters = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuioplkjhgfdsazxcvbnm1234567890"
-        var str = ""
-        for(var i=0; i<6; i++){
-            str += characters.charAt(Math.floor(Math.random()*62))
+        const characters = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuioplkjhgfdsazxcvbnm1234567890";
+        let str = "";
+        for (let i = 0; i < 12; i++) {
+            if(i%2 == 0){
+                str += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            else{
+                str += " "
+            }
         }
-        setCaptcha(str);
-    }
+
+        var str1 = ""
+        for(var i=0; i<11; i++){
+            str1 += str[i]
+        }
+        setCaptcha(str1);
+
+    };
 
     useEffect(() => {
         generatecaptcha();
     }, []);
 
-    const handlesubmit = (e) => {
-        e.preventDefault();
+    const validatePhone = () => {
         if (phone.length !== 10) {
             setPhoneError("Phone number must be exactly 10 digits.");
-            return;
+            return false;
+        } else {
+            setPhoneError("");
+            return true;
         }
-        if(enteredcaptcha != captcha){
-            setCaptchaError("Captcha does not match")
+    };
+
+    const validateCaptcha = () => {
+        if (enteredcaptcha.replace(/\s/g, '') !== captcha.replace(/\s/g, '')) {
+            setCaptchaError("Captcha does not match");
+            return false;
+        } else {
+            setCaptchaError("");
+            return true;
+        }
+    };
+
+    const handlesubmit = (e) => {
+        e.preventDefault();
+        const isPhoneValid = validatePhone();
+        const isCaptchaValid = validateCaptcha();
+
+        if (!isPhoneValid || !isCaptchaValid) {
             return;
         }
 
@@ -42,7 +69,7 @@ function Contact1() {
             name,
             phone,
             email,
-            message
+            message,
         };
 
         emailjs.send('service_meh9cwy', 'template_wvb38sw', templateParams, 'RsXo-SVngYaUiFZBv')
@@ -54,8 +81,6 @@ function Contact1() {
                 alert("Failed to send the form. Please try again.");
             });
 
-        setPhoneError("");
-        setCaptchaError("");
         handleReset();
         generatecaptcha();
     };
@@ -68,6 +93,9 @@ function Contact1() {
         const phoneNumber = e.target.value;
         if (/^\d*$/.test(phoneNumber) && phoneNumber.length <= 10) {
             setPhone(phoneNumber);
+            if (phoneNumber.length === 10) {
+                validatePhone();
+            }
         }
     };
 
@@ -86,17 +114,18 @@ function Contact1() {
         setMessage("");
         setPhoneError("");
         setCaptchaError("");
-        setCaptcha("");
+        setEnteredCaptcha("");
     };
 
     const handleCaptchaChange = (e) => {
         setEnteredCaptcha(e.target.value);
-    }
+        validateCaptcha();
+    };
 
     const refreshCaptcha = () => {
         generatecaptcha();
         setEnteredCaptcha("");
-    }
+    };
 
     return (
         <section className="contact1">
@@ -151,9 +180,9 @@ function Contact1() {
                             onChange={handleCaptchaChange}
                             required
                         />
-                        <span>{captcha}</span>
+                        <span id="captchabox">{captcha}</span>
                         <button type="button" className="refresh-icon" onClick={refreshCaptcha}>
-                                <RiRefreshLine />
+                            <RiRefreshLine />
                         </button><br></br>
                         {captchaerror && <p className="captchaerror">{captchaerror}</p>}
                     </div>
@@ -166,13 +195,13 @@ function Contact1() {
             <div className="notform">
                 <h2>Reach Us</h2>
                 <h4>Begin your Digital Transformation with us</h4><br></br>
-                <h4>Address</h4>
+                <h4><RiMapPin2Line />Address</h4>
                 <p>D2, Building Society</p>
                 <p>Kodaikanal, 624101</p>
                 <p>Tamilnadu, India</p><br></br>
-                <h4>Email</h4>
+                <h4><RiMailLine />Email</h4>
                 <p>sales@digitalsites.in</p><br></br>
-                <h4>Phone</h4>
+                <h4><RiPhoneLine />Phone</h4>
                 <p>+91 81222 40975</p>
             </div>
         </section>

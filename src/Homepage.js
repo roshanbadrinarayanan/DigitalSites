@@ -7,9 +7,14 @@ import About from "./About";
 import Launch from "./Launch";
 import "./Style.css"
 import { Helmet } from "react-helmet";
-
+import { useEffect } from "react";
+import Featured from "./Featured";
 
 function Home(){
+
+    useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to the top when component mounts
+    }, []);
 
     return (
         <>
@@ -23,6 +28,7 @@ function Home(){
                 <Slideshow /><br></br><br></br>
                 <About /><br></br><br></br>
                 <Launch />
+                <Featured />
             </main>
         </>
     );

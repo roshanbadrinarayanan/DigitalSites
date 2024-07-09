@@ -2,8 +2,13 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import cloud from "./cloud.png"
 import ecommerce from "./ecommercestore.png"
+import { useEffect } from "react";
 
 function Services(){
+
+    useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to the top when component mounts
+    }, []);
 
     const goTo = () => {
         window.open("https://store.zoho.in/ResellerCustomerSignUp.do?id=a6b06d2909612b54e59d3cc0d522b3a4", "_blank");
@@ -71,7 +76,7 @@ function Services(){
                             <li>Quotation Management</li>
                         </ul>
                     </div>
-                    <div className="together">
+                    <div className="together" id="legalmanagement">
                         <h3>Legal Management</h3>
                         <ul className="list">
                             <li>Digitize your legal case  management software</li>
@@ -79,7 +84,7 @@ function Services(){
                             <li>Monitor end-to-end case flow, manage client information, store legal documents</li>
                         </ul>
                     </div>
-                    <div className="together">
+                    <div className="together" id="manufacturing">
                         <h3>Manufacturing</h3>
                         <ul className="list">
                             <li>Material Procurement</li>
